@@ -12,8 +12,10 @@
     "@fortawesome/fontawesome-free": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "next": "14.2.3",
+    "next-nprogress-bar": "^2.3.11",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sonner": "^1.4.41"
   },
   "devDependencies": {
     "@types/node": "^20",

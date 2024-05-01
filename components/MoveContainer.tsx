@@ -1,6 +1,4 @@
 "use client";
-
-import { useRouter } from "next/navigation";
 import MouseMove from "./MouseMove";
 
 const MoveContainer = ({
@@ -10,29 +8,20 @@ const MoveContainer = ({
   show: boolean;
   setShow: (a: boolean) => void;
 }) => {
-  const router = useRouter();
   return (
     <article
+      onClick={() => setShow(false)}
       className={
         "absolute top-[calc(100%+10px)] sm:top-[calc(100%+30px)] right-5 bg-white rounded-xl overflow-hidden py-1 transition-all " +
         (show ? "scale-100" : "scale-0")
       }
     >
-      <MouseMove
-        url="logout.svg"
-        text="Profil"
-        onClick={() => {
-          router.push("/hello");
-          setShow(false);
-        }}
-      />
+      <MouseMove url="profile.svg" text="Profil" href="/profile" />
       <MouseMove
         url="logout.svg"
         text="Chiqish"
-        onClick={() => {
-          router.push("/auth");
-          setShow(false);
-        }}
+        href="/auth"
+        onClick={() => localStorage.clear()}
       />
     </article>
   );
