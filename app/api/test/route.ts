@@ -1,5 +1,9 @@
 import { getData } from "./db";
 
 export async function GET() {
-  return Response.json(getData());
+  let data: any[] = [];
+  data = await getData();
+  console.log(data);
+
+  return Response.json(data);
 }

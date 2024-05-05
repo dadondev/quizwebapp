@@ -16,7 +16,12 @@ const Header = ({
 }) => {
   const [show, setShow] = useState(false);
   const param = usePathname();
-  let admin = true;
+  const [admin, setAdmin] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("testAdmin") === "true") {
+      setAdmin(true);
+    }
+  }, []);
   useEffect(() => {
     if (show) {
       document.body.addEventListener("click", () => {
@@ -46,7 +51,7 @@ const Header = ({
 
               {admin ? (
                 <>
-                  <NavLink text="Yangi test" index={0} url="newtest" />
+                  <NavLink text="Testlar" index={0} url="tests" />
                   <NavLink text="Natijalar" index={1} url="results" />
                 </>
               ) : (

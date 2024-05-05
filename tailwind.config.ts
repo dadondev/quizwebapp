@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        emini: "322px",
+        mini: "375px",
+      },
       colors: {
         bg: "#f8f8f8",
         white: "#fff",

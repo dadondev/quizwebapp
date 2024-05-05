@@ -1,5 +1,8 @@
 import testingResult from "@/functions/testingResult";
-import db from "../db";
+import { edit } from "../db";
+import { onValue, ref } from "firebase/database";
+import { realDB } from "@/utils/firebase";
+import { Quiz } from "@/utils/type";
 
 export async function GET(
   _: Response,
@@ -11,11 +14,14 @@ export async function GET(
     };
   }
 ) {
-  let data: any;
-  data = db.tests.find((e) => e.id === params.id);
+  let data: Quiz[] = [];
+  let reference = ref(realDB, "/tests");
+  onValue(reference, (snap) => {
+    data = snap.val();
+  });
 
-  if (data) {
-    return Response.json(data);
+  if (data && data?.find((e) => e.id === params.id)) {
+    return Response.json(data.find((e) => e.id === params.id));
   } else {
     return Response.json("oops");
   }
@@ -33,11 +39,24 @@ export async function POST(
 ) {
   const res = await req.json();
 
-  const test = db.tests.find((e) => e.id === params.id);
+  let data: Quiz = {
+    id: "",
+    name: "",
+    quizs: [],
+  };
+  let reference = ref(realDB, "/tests");
+  onValue(reference, (snap) => {
+    data = snap.val().find((e: Quiz) => e.id === params.id);
+  });
 
-  if (test) {
-    return Response.json(testingResult(test, res));
+  if (data.id) {
+    return Response.json(testingResult(data, res));
   }
 
   return Response.json("oops");
+}
+
+export async function PUT(req: Request) {
+  const res = await req.json();
+  return Response.json(edit(res));
 }

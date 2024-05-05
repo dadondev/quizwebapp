@@ -5,9 +5,17 @@ export type Quiz = {
 };
 
 export type Quizs = {
+  id: string;
   question: string;
   variants: any;
   trueAnswer: string;
+  index?: number;
+  setActiveData?: (e: any) => void;
+  setOpen?: (a: boolean) => void;
+  edit?: {
+    setDatas: (a: any) => void;
+    datas: Quiz;
+  };
 };
 
 export type dbType = {

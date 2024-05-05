@@ -1,5 +1,7 @@
 "use client";
+import { signOut } from "firebase/auth";
 import MouseMove from "./MouseMove";
+import { auth } from "@/utils/firebase";
 
 const MoveContainer = ({
   show,
@@ -21,7 +23,10 @@ const MoveContainer = ({
         url="logout.svg"
         text="Chiqish"
         href="/auth"
-        onClick={() => localStorage.clear()}
+        onClick={() => {
+          localStorage.clear();
+          signOut(auth);
+        }}
       />
     </article>
   );
